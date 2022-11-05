@@ -1,0 +1,21 @@
+#playfield {
+    border: 1px solid black
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+    background-color: #ccc;
+    text-align: center;
+}
+
+#sprite {
+    display: none;
+}
