@@ -1,7 +1,7 @@
 const path = require("path");
 module.exports = {
     entry: {
-        nazwa_pliku_wynikowego_1: './src/index.ts',
+        index: './src/index.ts',
     },
     output: {
         path: path.resolve(__dirname, './dist'),

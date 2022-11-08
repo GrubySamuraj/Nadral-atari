@@ -1,21 +1,24 @@
 #playfield {
-    border: 1px solid black
+    border: 1px solid white;
+    width: 1280px;
+    height: 578px;
 }
 
 body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: black;
 }
 
 footer {
     bottom: 0px;
-    position: fixed;
+    position: absolute;
     width: 100%;
     background-color: #ccc;
     text-align: center;
 }
 
-#sprite {
+.sprite {
     display: none;
 }
