@@ -1,11 +1,16 @@
+import { Board } from "./board"
 interface usefulVariablesInterface {
-    canvas: HTMLCanvasElement,
-    speed: number,
-    boards: boardInterface[]
+    readonly canvas: HTMLCanvasElement,
+    readonly speed: number,
+    boards: boardInterface[],
+    loadedID: number,
+    loadedBoard: Board,
+    readonly StartPosx: number,
+    readonly StartPosy: number,
+    map: Board[],
 }
 interface boardInterface {
     id: number,
-    hitboxes: hitboxInterface[],
     exit: exitInterface,
     sx: number,
     sy: number,
@@ -16,7 +21,7 @@ interface boardInterface {
     lockedArea?: null
 }
 interface przeszkadzajkaInterface {
-    img: HTMLImageElement,
+    readonly img: HTMLImageElement,
     isAlive: boolean,
     posx: number,
     posy: number,
@@ -31,20 +36,10 @@ interface keyInterface {
 
 }
 interface exitInterface {
-    N: boolean,
-    S: boolean,
-    E: boolean,
-    W: boolean
-}
-interface hitboxInterface {
-    start: {
-        posx: number,
-        posy: number
-    },
-    end: {
-        posx: number,
-        posy: number
-    }
+    N: number | null,
+    S: number | null,
+    E: number | null,
+    W: number | null
 }
 //Created by Jakub Dragosz
-export { usefulVariablesInterface, exitInterface, hitboxInterface }
+export { usefulVariablesInterface, exitInterface }

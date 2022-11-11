@@ -1,3 +1,4 @@
+import { Board } from "./board"
 import { usefulVariablesInterface } from "./interfaces"
 export let usefulVariables: usefulVariablesInterface = {
     canvas: document.getElementById("playfield") as HTMLCanvasElement,
@@ -5,81 +6,140 @@ export let usefulVariables: usefulVariablesInterface = {
     boards: [
         {
             id: 0,
-            hitboxes:
-                [
-                    {
-                        start: {
-                            posx: 10,
-                            posy: 272
-                        },
-                        end: {
-                            posx: 330,
-                            posy: 256
-                        }
-                    },
-                    {
-                        start: {
-                            posx: 10,
-                            posy: 256
-                        },
-                        end: {
-                            posx: 26,
-                            posy: 128
-                        }
-                    },
-                    {
-                        start: {
-                            posx: 26,
-                            posy: 176
-                        },
-                        end: {
-                            posx: 330,
-                            posy: 128
-                        }
-                    },
-                    {
-                        start: {
-                            posx: 146,
-                            posy: 256
-                        },
-                        end: {
-                            posx: 330,
-                            posy: 224
-                        }
-                    }
-                ],
             exit: {
-                N: false,
-                S: false,
-                E: true,
-                W: false
+                N: null,
+                S: null,
+                E: 1,
+                W: null
             },
             sx: 10,
             sy: 128
         },
         {
             id: 1,
-            hitboxes:
-                [
-                    {
-                        start: {
-                            posx: 10,
-                            posy: 272
-                        },
-                        end: {
-                            posx: 10,
-                            posy: 272
-                        }
-                    }
-                ],
             exit: {
-                N: false,
-                S: false,
-                E: true,
-                W: true
+                N: null,
+                S: null,
+                E: 2,
+                W: 0
             },
             sx: 330,
             sy: 128
+        },
+        {
+            id: 2,
+            exit: {
+                N: null,
+                S: null,
+                E: 3,
+                W: 1
+            },
+            sx: 650,
+            sy: 128
+        },
+        {
+            id: 3,
+            exit: {
+                N: null,
+                S: 4,
+                E: null,
+                W: 2
+            },
+            sx: 970,
+            sy: 128
+        },
+        {
+            id: 4,
+            exit: {
+                N: 3,
+                S: null,
+                E: null,
+                W: 5
+            },
+            sx: 970,
+            sy: 272
+        },
+        {
+            id: 5,
+            exit: {
+                N: null,
+                S: 10,
+                E: 4,
+                W: 6
+            },
+            sx: 650,
+            sy: 272
+        },
+        {
+            id: 6,
+            exit: {
+                N: null,
+                S: 9,
+                E: 5,
+                W: 7
+            },
+            sx: 330,
+            sy: 272
+        },
+        {
+            id: 7,
+            exit: {
+                N: null,
+                S: 8,
+                E: 6,
+                W: null
+            },
+            sx: 10,
+            sy: 272
+        },
+        {
+            id: 8,
+            exit: {
+                N: 7,
+                S: null,
+                E: 9,
+                W: null
+            },
+            sx: 10,
+            sy: 416
+        },
+        {
+            id: 9,
+            exit: {
+                N: 6,
+                S: null,
+                E: null,
+                W: 8
+            },
+            sx: 330,
+            sy: 416
+        },
+        {
+            id: 10,
+            exit: {
+                N: 5,
+                S: null,
+                E: null, //ze zmianą na true po zdobyciu klucza
+                W: null
+            },
+            sx: 650,
+            sy: 416
+        },
+        {
+            id: 11,
+            exit: {
+                N: null,
+                S: null,
+                E: null,
+                W: 10
+            },
+            sx: 970,
+            sy: 416
         }
-    ]
+    ],
+    loadedBoard: new Board(0, { N: null, S: null, E: 1, W: null }, 10, 128),
+    StartPosx: 10,
+    StartPosy: 128,
+    loadedID: 0,
+    map: []
 }
