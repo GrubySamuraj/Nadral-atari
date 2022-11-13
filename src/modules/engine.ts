@@ -1,5 +1,6 @@
 import { usefulVariables } from "./usefulVariables";
 import { player } from "../index";
+import { ui } from "../index";
 export class Engine {
     readonly fps: number = 60;
     public front: string = "right";
@@ -23,7 +24,6 @@ export class Engine {
     }
     move() {
         this.interval = window.setInterval(() => {
-            // console.log(usefulVariables.loadedBoard);
             if (!player.isColided()) {
                 if (player.posx > usefulVariables.canvas.width && usefulVariables.loadedBoard.exit.E) {
                     this.nextBoard(usefulVariables.loadedBoard.exit.E, 0, player.posy);
@@ -62,20 +62,31 @@ export class Engine {
                 }
             }
             else {
-                this.lost(this.interval);
+                this.lost();
             }
         }, 1000 / this.fps);
     }
     nextBoard(id: number, posx: number, posy: number) {
-        //wyłączenie kolizji na chwile
-        player.posx = posx;
-        player.posy = posy;
+        //wyłączenie kolizji na chwile!!!! lub safespoty zrobić - miejsca gdzie napewno nadral będzie bezpieczny
         usefulVariables.loadedID = id;
         usefulVariables.loadedBoard = usefulVariables.map[usefulVariables.loadedID];
+        usefulVariables.loadedBoard.load();
+        ui.updateNumberMap(ui.ctx2);
+        player.posx = posx;
+        player.posy = posy;
     }
-    lost(interwal: number) {
-        window.clearInterval(interwal);
-        alert("przegrałeś ;<");
-        location.reload();
+    lost() {
+        if (ui.lives > 0) {
+            player.posx = usefulVariables.StartPosx;
+            player.posy = usefulVariables.StartPosy;
+            usefulVariables.loadedBoard.load();
+            ui.lives--;
+            ui.updateLife();
+            ui.startHP();
+        }
+        else {
+            alert("Przegrałeś! ;<");
+            location.reload();
+        }
     }
 }

@@ -138,8 +138,10 @@ export let usefulVariables: usefulVariablesInterface = {
         }
     ],
     loadedBoard: new Board(0, { N: null, S: null, E: 1, W: null }, 10, 128),
-    StartPosx: 10,
-    StartPosy: 128,
+    StartPosx: 250,
+    StartPosy: 270,
     loadedID: 0,
-    map: []
+    map: [],
+    status1: document.getElementById("status1") as HTMLCanvasElement,
+    status2: document.getElementById("status2") as HTMLCanvasElement,
 }

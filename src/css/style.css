@@ -21,3 +21,22 @@ footer {
 .sprite {
     display: none;
 }
+
+#status1,
+#status2 {
+    width: 1280px;
+    height: 100px;
+}
+
+#status1 {
+    height: 80px;
+    border-bottom: 3px solid #A6A6A6;
+}
+
+#game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 1280px;
+}

@@ -8,7 +8,7 @@ export class Game {
 
     }
     create() {
-
+        
     }
     public load(sx: number, sy: number) {
         let ctx = usefulVariables.canvas.getContext('2d');

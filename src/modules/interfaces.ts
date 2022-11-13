@@ -8,6 +8,8 @@ interface usefulVariablesInterface {
     readonly StartPosx: number,
     readonly StartPosy: number,
     map: Board[],
+    status1: HTMLCanvasElement,
+    status2: HTMLCanvasElement
 }
 interface boardInterface {
     id: number,

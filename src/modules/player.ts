@@ -10,6 +10,7 @@ export class Player {
     public posy: number
     public whiteList: string[] = ["#000000"];
     public flipped = true;
+    public collision = false;
     constructor(posx: number, posy: number) {
         this.posx = posx;
         this.posy = posy;
@@ -32,7 +33,10 @@ export class Player {
         let hex2 = "#" + ("000000" + this.rgbToHex(przed[0], przed[1], przed[2])).slice(-6);
         console.log(hex, hex2);
         if (!this.whiteList.includes(hex) || !this.whiteList.includes(hex2)) {
+            console.log(this.posx);
+            console.log(this.posy);
             return true;
+
         }
         else {
             return false;
