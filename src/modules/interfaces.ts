@@ -19,8 +19,7 @@ interface boardInterface {
     sy: number,
     przeszkadzajki?: przeszkadzajkaInterface[],
     lamp?: lampInterface
-    specialItem?: specialItemInterface
-    key?: keyInterface,
+    item?: itemInterface
     lockedArea?: null
 }
 interface przeszkadzajkaInterface {
@@ -35,11 +34,12 @@ interface lampInterface {
     posy: number,
     isBroken: boolean
 }
-interface specialItemInterface {
-
-}
-interface keyInterface {
-
+interface itemInterface {
+    id: number,
+    posx: number,
+    posy: number,
+    type: string,
+    used: boolean
 }
 interface exitInterface {
     N: number | null,

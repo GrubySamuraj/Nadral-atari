@@ -50,7 +50,7 @@ class Ui {
         this.ctx2.drawImage(document.getElementById("heathbar") as HTMLImageElement, 0, 20);
         this.ctx2.drawImage(document.getElementById("healthbarfull") as HTMLImageElement, 116, 26);
         this.updateNumberMap(this.ctx2);
-    }//80s życia, 1 strzał zabiera 3s
+    }//100s życia, 1 strzał zabiera 3s
     writePoints(isHighScore: boolean, ctx: CanvasRenderingContext2D) {
         if (isHighScore) {
             for (let x = 0; x < this.high.length; x++) {
@@ -85,7 +85,6 @@ class Ui {
         if (loadedID.length == 1) {
             let loadedIDarr = loadedID.split("");
             loadedIDarr.unshift("0");
-            console.log(loadedIDarr);
             loadedID = loadedIDarr.join("");
         }
         for (let x = 0; x < loadedID.length; x++) {
@@ -104,7 +103,6 @@ class Ui {
         }
         this.interwal = window.setInterval(() => {
             this.hp--;
-            console.log(this.hp);
             this.ctx2.drawImage(document.getElementById("heathbar") as HTMLImageElement, 0, 20);
             this.ctx2.drawImage(document.getElementById("healthbarfull") as HTMLImageElement, 0, 0, this.hp * 11, 60, 116, 26, this.hp * 11, 60);
             // zrobić dynamicznie sprawdzanie jaką dlugosc nalezy na 1 interwale podzielic
@@ -115,6 +113,12 @@ class Ui {
                 engine.lost();
             }
         }, 1000);
+    }
+    addKeyToInventory() {
+        this.ctx2.drawImage(document.getElementById("key") as HTMLImageElement, 130, 60, 200, 50);
+    }
+    removeKey() {
+        this.ctx2.clearRect(130, 60, 200, 50);
     }
 }
 export { Ui };

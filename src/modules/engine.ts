@@ -58,6 +58,7 @@ export class Engine {
                     }
                     if (this.pressedKey === " ") {
                         console.log("strzał");
+                        usefulVariables.map[usefulVariables.loadedID].lamp.turnOff();
                     }
                 }
             }
@@ -68,6 +69,7 @@ export class Engine {
     }
     nextBoard(id: number, posx: number, posy: number) {
         //wyłączenie kolizji na chwile!!!! lub safespoty zrobić - miejsca gdzie napewno nadral będzie bezpieczny // działa ;>
+        usefulVariables.map[usefulVariables.loadedID].lamp.isBroken = false;
         usefulVariables.loadedID = id;
         usefulVariables.loadedBoard = usefulVariables.map[usefulVariables.loadedID];
         usefulVariables.loadedBoard.load();
