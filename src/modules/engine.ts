@@ -16,7 +16,7 @@ export class Engine {
             document.onkeydown = (e) => {
                 this.pressedKey = e.key.toLocaleLowerCase();
             }
-            document.onkeyup = (e) => {
+            document.onkeyup = () => {
                 this.pressedKey = "";
             }
             requestAnimationFrame(this.animate.bind(this));
@@ -67,7 +67,7 @@ export class Engine {
         }, 1000 / this.fps);
     }
     nextBoard(id: number, posx: number, posy: number) {
-        //wyłączenie kolizji na chwile!!!! lub safespoty zrobić - miejsca gdzie napewno nadral będzie bezpieczny
+        //wyłączenie kolizji na chwile!!!! lub safespoty zrobić - miejsca gdzie napewno nadral będzie bezpieczny // działa ;>
         usefulVariables.loadedID = id;
         usefulVariables.loadedBoard = usefulVariables.map[usefulVariables.loadedID];
         usefulVariables.loadedBoard.load();

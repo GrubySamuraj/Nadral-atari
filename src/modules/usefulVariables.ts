@@ -1,5 +1,6 @@
 import { Board } from "./board"
-import { usefulVariablesInterface } from "./interfaces"
+import { usefulVariablesInterface } from "./interfaces";
+import { Lamp } from "./lamp";
 export let usefulVariables: usefulVariablesInterface = {
     canvas: document.getElementById("playfield") as HTMLCanvasElement,
     speed: 10,
@@ -13,7 +14,13 @@ export let usefulVariables: usefulVariablesInterface = {
                 W: null
             },
             sx: 10,
-            sy: 128
+            sy: 128,
+            lamp: {
+                id: 0,
+                posx: 452,
+                posy: 378,
+                isBroken: false
+            }
         },
         {
             id: 1,
@@ -137,7 +144,7 @@ export let usefulVariables: usefulVariablesInterface = {
             sy: 416
         }
     ],
-    loadedBoard: new Board(0, { N: null, S: null, E: 1, W: null }, 10, 128),
+    loadedBoard: new Board(0, { N: null, S: null, E: 1, W: null }, 10, 128, new Lamp(0, 452, 378, false)),
     StartPosx: 250,
     StartPosy: 270,
     loadedID: 0,

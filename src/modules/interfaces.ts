@@ -1,4 +1,5 @@
 import { Board } from "./board"
+import { Lamp } from "./lamp"
 interface usefulVariablesInterface {
     readonly canvas: HTMLCanvasElement,
     readonly speed: number,
@@ -29,7 +30,10 @@ interface przeszkadzajkaInterface {
     posy: number,
 }
 interface lampInterface {
-
+    id: number,
+    posx: number,
+    posy: number,
+    isBroken: boolean
 }
 interface specialItemInterface {
 
