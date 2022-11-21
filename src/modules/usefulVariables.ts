@@ -270,14 +270,22 @@ export let usefulVariables: usefulVariablesInterface = {
                 posx: 100,
                 posy: 400,
                 isBroken: false
+            },
+            item: {
+                id: 1,
+                posx: 580,
+                posy: 120,
+                type: "end",
+                used: false
             }
         }
     ],
     loadedBoard: new Board(0, { N: null, S: null, E: 1, W: null }, 10, 128, new Lamp(0, 452, 378, false)),
     StartPosx: 150,
     StartPosy: 270,
-    loadedID: 10,
+    loadedID: 0,
     map: [],
     status1: document.getElementById("status1") as HTMLCanvasElement,
     status2: document.getElementById("status2") as HTMLCanvasElement,
+    bullets: 0,
 }

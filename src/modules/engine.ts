@@ -1,11 +1,14 @@
 import { usefulVariables } from "./usefulVariables";
 import { player } from "../index";
 import { ui } from "../index";
+import { Bullet } from "./bullet";
 export class Engine {
     readonly fps: number = 60;
     public front: string = "right";
     private pressedKey: string | null;
     private interval: number;
+    private interval2: number;
+    private cooldown: number = 0;
     constructor() {
         this.move();
     }
@@ -57,8 +60,23 @@ export class Engine {
                         player.posx += usefulVariables.speed;
                     }
                     if (this.pressedKey === " ") {
-                        console.log("strzał");
-                        usefulVariables.map[usefulVariables.loadedID].lamp.turnOff();
+                        let bposx;
+                        if (this.front === "right") {
+                            bposx = player.posx + player.width
+                        }
+                        else {
+                            bposx = player.posx - 23;
+                        }
+                        if (usefulVariables.bullets <= 4 && this.cooldown === 0) {
+                            let pew = new Bullet(bposx, (player.posy + player.height / 2) + 6, this.front);
+                            pew.pewPew(bposx, (player.posy + player.height / 2) + 6);
+                        }
+                        this.cooldown++;
+                        this.interval2 = window.setInterval(() => {
+                            if (this.cooldown > 0)
+                                this.cooldown--;
+                        }, 200);
+                        // usefulVariables.map[usefulVariables.loadedID].lamp.turnOff();
                     }
                 }
             }

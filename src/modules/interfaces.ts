@@ -1,5 +1,4 @@
-import { Board } from "./board"
-import { Lamp } from "./lamp"
+import { Board } from "./board";
 interface usefulVariablesInterface {
     readonly canvas: HTMLCanvasElement,
     readonly speed: number,
@@ -10,7 +9,8 @@ interface usefulVariablesInterface {
     readonly StartPosy: number,
     map: Board[],
     status1: HTMLCanvasElement,
-    status2: HTMLCanvasElement
+    status2: HTMLCanvasElement,
+    bullets: number
 }
 interface boardInterface {
     id: number,

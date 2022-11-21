@@ -19,27 +19,38 @@ class Item {
     }
     generate() {
         if (!this.used) {
-            let ctx = usefulVariables.canvas.getContext("2d");
             switch (this.type) {
                 case "energy":
+                    let ctx = usefulVariables.canvas.getContext("2d");
                     let energy = document.getElementById("energy") as HTMLImageElement;
                     ctx.drawImage(energy, this.id * 61, 0, 61, 36, this.posx, this.posy, this.width, this.height);
                     break;
                 case "mystery":
+                    ctx = usefulVariables.canvas.getContext("2d");
+                    // ctx.fillStyle = `rgba(0,0,0,0.1)`
                     let mystery = document.getElementById("suprise") as HTMLImageElement;
                     ctx.drawImage(mystery, this.id * 55, 0, 55, 36, this.posx, this.posy, this.width, this.height);
+                    // ctx.fillRect(this.posx, this.posy, this.width, this.height);
                     break;
                 case "hpup":
+                    ctx = usefulVariables.canvas.getContext("2d");
                     let hpup = document.getElementById("hpplus") as HTMLImageElement;
                     ctx.drawImage(hpup, this.id * 60, 0, 60, 36, this.posx, this.posy, this.width, this.height);
                     break;
                 case "key":
+                    ctx = usefulVariables.canvas.getContext("2d");
                     let key = document.getElementById("keyItem") as HTMLImageElement;
                     ctx.drawImage(key, 0, 0, 54, 36, this.posx, this.posy, this.width + 20, this.height - 10);
                     break;
                 case "lock":
+                    ctx = usefulVariables.canvas.getContext("2d");
                     let lock = document.getElementById("lock") as HTMLImageElement;
                     ctx.drawImage(lock, 0, 0, 54, 36, this.posx, this.posy, this.width + 20, this.height - 10);
+                    break;
+                case "end":
+                    ctx = usefulVariables.canvas.getContext("2d");
+                    let end = document.getElementById("end") as HTMLImageElement;
+                    ctx.drawImage(end, 0, 0, 54, 36, this.posx, this.posy, this.width + 20, this.height - 10);
                     break;
             }
         }
@@ -61,10 +72,11 @@ class Item {
             case "lock":
                 this.unlock();
                 break;
-            case "missionEnd":
+            case "end":
+                console.log("end");
                 break;
         }
-        if (this.type != "lock" && this.type != "missionEnd")
+        if (this.type != "lock" && this.type != "end")
             this.used = true;
     }
     addEnergy() {
@@ -99,7 +111,7 @@ class Item {
         }
     }
     missionEnd() {
-
+        console.log("endMission");
     }
 }
 export { Item }

@@ -101,18 +101,19 @@ class Ui {
             window.clearInterval(this.interwal);
             this.hp = 100;
         }
-        this.interwal = window.setInterval(() => {
+        window.setInterval(() => {
             this.hp--;
+        }, 1000)
+        this.interwal = window.setInterval(() => {
             this.ctx2.drawImage(document.getElementById("heathbar") as HTMLImageElement, 0, 20);
             this.ctx2.drawImage(document.getElementById("healthbarfull") as HTMLImageElement, 0, 0, this.hp * 11, 60, 116, 26, this.hp * 11, 60);
-            // zrobić dynamicznie sprawdzanie jaką dlugosc nalezy na 1 interwale podzielic
             if (this.hp < 40) {
                 //mryganie na pomaranczowo
             }
-            if (this.hp === 0) {
+            if (this.hp <= 0) {
                 engine.lost();
             }
-        }, 1000);
+        }, 1000 / 60);
     }
     addKeyToInventory() {
         this.ctx2.drawImage(document.getElementById("key") as HTMLImageElement, 130, 60, 200, 50);
