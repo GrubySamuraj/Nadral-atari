@@ -1,0 +1,4 @@
+class Npc {
+
+}
+export { Npc };
