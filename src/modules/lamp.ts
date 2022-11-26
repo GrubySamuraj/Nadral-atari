@@ -1,5 +1,6 @@
 import { Board } from "./board";
 import { usefulVariables } from "./usefulVariables";
+import { ui } from "../index";
 
 class Lamp {
     public id: number;
@@ -36,6 +37,7 @@ class Lamp {
     }
     turnOff() {
         this.isBroken = true;
+        ui.writePoints(100);
     }
 }
 export { Lamp }

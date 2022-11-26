@@ -11,7 +11,7 @@ class Bullet {
     public interwal: number;
     private width = 20;
     private height = 5;
-    private WhiteList: string[] = ["#007f7f", "#57ab3b", "#000000", "#901829", "#26060b", "#320924", "#8c1a65", "#081c51", "#123eb2", "#001936", "#008300", "#00489d", "#005d00", "#003900", "#627500", "#005274", "#5134ae", "#5a4300", "#adadad", "#aeaeae"];
+    private WhiteList: string[] = ["#007f7f", "#57ab3b", "#000000", "#901829", "#26060b", "#320924", "#8c1a65", "#081c51", "#123eb2", "#001936", "#008300", "#00489d", "#005d00", "#003900", "#627500", "#005274", "#5134ae", "#5a4300", "#adadad", "#aeaeae", "#0000ff", "#00ffff", "#FFC0CB", "#7f6065", "#00007f"];
     private LampColor: string[] = ["#ffffff"];
     constructor(posx: number, posy: number, direction: string) {
         this.posx = posx;
@@ -30,21 +30,23 @@ class Bullet {
         usefulVariables.bullets++;
     }
     pewPew(posx: number, posy: number) {
+        this.posx = posx;
+        this.posy = posy;
         let ctx = usefulVariables.canvas.getContext("2d");
         ctx.fillStyle = this.chosenColor;
         if (this.direction === "right")
-            posx += this.speed;
+            this.posx += this.speed;
         else
-            posx -= this.speed;
-        ctx.fillRect(posx, posy, 20, 5);
+            this.posx -= this.speed;
+        ctx.fillRect(this.posx, this.posy, 20, 5);
         this.interwal = window.setTimeout(() => {
-            if (posx > 0 && posx < 1280 && this.isColided()) {
-                this.pewPew(posx, posy);
+            if (this.posx > 0 && this.posx < 1280 && this.isColided()) {
+                this.pewPew(this.posx, this.posy);
             }
             else {
                 usefulVariables.bullets--;
             }
-        }, 1000 / engine.fps);
+        }, 1);
     }
     isColided() {
         let ctx = usefulVariables.canvas.getContext('2d');
@@ -52,9 +54,11 @@ class Bullet {
         let data2 = ctx.getImageData(this.posx + this.width + 5, this.posy, 1, 1).data;
         let hex = "#" + ("000000" + this.rgbToHex(data[0], data[1], data[2])).slice(-6);
         let hex2 = "#" + ("000000" + this.rgbToHex(data2[0], data2[1], data2[2])).slice(-6);
-        console.log(this.WhiteList.includes(hex), this.WhiteList.includes(hex2));
+        // console.log(this.WhiteList.includes(hex), this.WhiteList.includes(hex2));
         console.log(hex, hex2);
-
+        if (this.LampColor.includes(hex) || this.LampColor.includes(hex2)) {
+            usefulVariables.map[usefulVariables.loadedID].lamp.turnOff();
+        }
         if (this.WhiteList.includes(hex) && this.WhiteList.includes(hex2)) {
             return true;
         }

@@ -9,7 +9,7 @@ class Item {
     public used: boolean
     private readonly width = 60;
     private readonly height = 60;
-    private types: string[] = ["energy", "life"];
+    private types: string[] = ["energy", "life", "points"];
     constructor(id: number, posx: number, posy: number, type: string, used: boolean) {
         this.id = id;
         this.posx = posx;
@@ -102,12 +102,15 @@ class Item {
         ui.updateLife();
     }
     mystery() {
-        let type = this.types[Math.floor(Math.random() * 2)];
+        let type = this.types[Math.floor(Math.random() * this.types.length)];
         if (type === "energy") {
             this.addEnergy();
         }
         else if (type === "life") {
             this.addLife();
+        }
+        else if (type === "points") {
+            ui.writePoints(500);
         }
     }
     missionEnd() {

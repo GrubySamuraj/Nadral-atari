@@ -8,7 +8,7 @@ export class Engine {
     private pressedKey: string | null;
     private interval: number;
     private interval2: number;
-    private cooldown: number = 0;
+    private cooldown: boolean = false;
     constructor() {
         this.move();
     }
@@ -16,6 +16,7 @@ export class Engine {
         setTimeout(() => {
             usefulVariables.map[usefulVariables.loadedID].load();
             player.create();
+            // document.addEventListener("click",)
             document.onkeydown = (e) => {
                 this.pressedKey = e.key.toLocaleLowerCase();
             }
@@ -67,16 +68,14 @@ export class Engine {
                         else {
                             bposx = player.posx - 23;
                         }
-                        if (usefulVariables.bullets <= 4 && this.cooldown === 0) {
+                        if (usefulVariables.bullets <= 4 && !this.cooldown) {
                             let pew = new Bullet(bposx, (player.posy + player.height / 2) + 6, this.front);
                             pew.pewPew(bposx, (player.posy + player.height / 2) + 6);
+                            this.cooldown = true;
+                            setTimeout(() => {
+                                this.cooldown = false;
+                            }, 500);
                         }
-                        this.cooldown++;
-                        this.interval2 = window.setInterval(() => {
-                            if (this.cooldown > 0)
-                                this.cooldown--;
-                        }, 200);
-                        // usefulVariables.map[usefulVariables.loadedID].lamp.turnOff();
                     }
                 }
             }

@@ -51,7 +51,11 @@ class Ui {
         this.ctx2.drawImage(document.getElementById("healthbarfull") as HTMLImageElement, 116, 26);
         this.updateNumberMap(this.ctx2);
     }//100s życia, 1 strzał zabiera 3s
-    writePoints(isHighScore: boolean, ctx: CanvasRenderingContext2D) {
+    writePoints(score: number) {
+        let ctx = usefulVariables.canvas.getContext("2d");
+        this.points = this.convertPoints(score);
+        console.log(this.points);
+        let isHighScore = true;
         if (isHighScore) {
             for (let x = 0; x < this.high.length; x++) {
                 ctx.drawImage(document.getElementById("numbersUp") as HTMLImageElement,
@@ -66,9 +70,9 @@ class Ui {
                 );
             }
         }
+        this.ctx.clearRect(0, 75, 200, 100);
         for (let x = 0; x < this.points.length; x++) {
-            ctx.clearRect(33 * x, 75, 30, 100);
-            ctx.drawImage(document.getElementById("numbersUp") as HTMLImageElement,
+            this.ctx.drawImage(document.getElementById("numbersUp") as HTMLImageElement,
                 27 * this.points[x], //sx
                 0, //sy
                 27, //sWidth
@@ -78,7 +82,19 @@ class Ui {
                 30, //dWidth
                 100 //dHeight
             );
+            //drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
         }
+    }
+    convertPoints(score: number) {
+        let p = parseInt(this.points.join(""));
+        p += score;
+        let wynik = p.toString().split("").map((item) => {
+            return parseInt(item)
+        })
+        while (wynik.length < 6) {
+            wynik.unshift(0);
+        }
+        return wynik;
     }
     updateNumberMap(ctx2: CanvasRenderingContext2D) {
         let loadedID = usefulVariables.loadedID.toString();
