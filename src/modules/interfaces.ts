@@ -8,25 +8,27 @@ interface usefulVariablesInterface {
     readonly StartPosx: number,
     readonly StartPosy: number,
     map: Board[],
+    npcNames: string[],
+    npcColors: string[],
     status1: HTMLCanvasElement,
     status2: HTMLCanvasElement,
-    bullets: number
+    bullets: number,
 }
 interface boardInterface {
     id: number,
     exit: exitInterface,
     sx: number,
     sy: number,
-    przeszkadzajki?: przeszkadzajkaInterface[],
+    npcs?: npcInterface[],
     lamp?: lampInterface
     item?: itemInterface
     lockedArea?: null
 }
-interface przeszkadzajkaInterface {
-    readonly img: HTMLImageElement,
-    isAlive: boolean,
+interface npcInterface {
     posx: number,
     posy: number,
+    type?: string
+    isAlive: boolean,
 }
 interface lampInterface {
     id: number,
@@ -48,4 +50,4 @@ interface exitInterface {
     W: number | null
 }
 //Created by Jakub Dragosz
-export { usefulVariablesInterface, exitInterface }
+export { usefulVariablesInterface, exitInterface, npcInterface }

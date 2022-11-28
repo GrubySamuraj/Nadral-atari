@@ -1,6 +1,5 @@
 import { engine } from "../index";
 import { usefulVariables } from "./usefulVariables";
-//zadanie 12.11 - interface u góry i na dole
 export class Player {
     readonly width = 65;
     readonly height = 55;
@@ -26,6 +25,17 @@ export class Player {
         if (engine.front === "right") {
             let ctx = usefulVariables.canvas.getContext('2d');
             ctx.drawImage(this.playerimg, this.posx, this.posy, this.width, this.height);
+            // let imageData = ctx.getImageData(this.posx, this.posy, this.width, this.height);
+            // console.log(imageData);
+
+            // let data = imageData.data;
+            // for (var p = 0; p < data.length; p += 4) {
+            //     data[p + 0] = 233;
+            //     data[p + 1] = 233;
+            //     data[p + 2] = 233;
+            //     data[p + 3] = 255;
+            // }
+            // // ctx.putImageData(imageData, 0, 0);
         }
         else if (engine.front === "left") {
             let ctx = usefulVariables.canvas.getContext('2d');

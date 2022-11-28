@@ -1,6 +1,7 @@
 import { Board } from "./board"
 import { usefulVariablesInterface } from "./interfaces";
 import { Lamp } from "./lamp";
+import { Npc } from "./npc";
 export let usefulVariables: usefulVariablesInterface = {
     canvas: document.getElementById("playfield") as HTMLCanvasElement,
     speed: 10,
@@ -27,7 +28,24 @@ export let usefulVariables: usefulVariablesInterface = {
                 posy: 410,
                 type: "mystery",
                 used: false
-            }
+            },
+            npcs: [
+                {
+                    posx: 940,
+                    posy: 260,
+                    isAlive: true
+                },
+                {
+                    posx: 900,
+                    posy: 260,
+                    isAlive: true
+                },
+                {
+                    posx: 870,
+                    posy: 260,
+                    isAlive: true
+                }
+            ]
         },
         {
             id: 1,
@@ -51,7 +69,24 @@ export let usefulVariables: usefulVariablesInterface = {
                 posy: 420,
                 type: "mystery",
                 used: false
-            }
+            },
+            npcs: [
+                {
+                    posx: 700,
+                    posy: 260,
+                    isAlive: true
+                },
+                {
+                    posx: 720,
+                    posy: 260,
+                    isAlive: true
+                },
+                {
+                    posx: 680,
+                    posy: 260,
+                    isAlive: true
+                }
+            ]
         },
         {
             id: 2,
@@ -68,7 +103,24 @@ export let usefulVariables: usefulVariablesInterface = {
                 posx: 510,
                 posy: 350,
                 isBroken: false
-            }
+            },
+            npcs: [
+                {
+                    posx: 700,
+                    posy: 120,
+                    isAlive: true
+                },
+                {
+                    posx: 720,
+                    posy: 120,
+                    isAlive: true
+                },
+                {
+                    posx: 680,
+                    posy: 120,
+                    isAlive: true
+                }
+            ]
         },
         {
             id: 3,
@@ -92,7 +144,24 @@ export let usefulVariables: usefulVariablesInterface = {
                 posy: 120,
                 type: "energy",
                 used: false
-            }
+            },
+            npcs: [
+                {
+                    posx: 800,
+                    posy: 120,
+                    isAlive: true
+                },
+                {
+                    posx: 820,
+                    posy: 120,
+                    isAlive: true
+                },
+                {
+                    posx: 780,
+                    posy: 120,
+                    isAlive: true
+                }
+            ]
         },
         {
             id: 4,
@@ -109,7 +178,24 @@ export let usefulVariables: usefulVariablesInterface = {
                 posx: 540,
                 posy: 350,
                 isBroken: false
-            }
+            },
+            npcs: [
+                {
+                    posx: 850,
+                    posy: 200,
+                    isAlive: true
+                },
+                {
+                    posx: 870,
+                    posy: 200,
+                    isAlive: true
+                },
+                {
+                    posx: 830,
+                    posy: 200,
+                    isAlive: true
+                }
+            ]
         },
         {
             id: 5,
@@ -133,7 +219,24 @@ export let usefulVariables: usefulVariablesInterface = {
                 posy: 100,
                 type: "energy",
                 used: false
-            }
+            },
+            npcs: [
+                {
+                    posx: 1030,
+                    posy: 420,
+                    isAlive: true
+                },
+                {
+                    posx: 1060,
+                    posy: 420,
+                    isAlive: true
+                },
+                {
+                    posx: 1090,
+                    posy: 420,
+                    isAlive: true
+                }
+            ]
         },
         {
             id: 6,
@@ -157,7 +260,24 @@ export let usefulVariables: usefulVariablesInterface = {
                 posy: 100,
                 type: "hpup",
                 used: false
-            }
+            },
+            npcs: [
+                {
+                    posx: 1030,
+                    posy: 420,
+                    isAlive: true
+                },
+                {
+                    posx: 1060,
+                    posy: 420,
+                    isAlive: true
+                },
+                {
+                    posx: 1090,
+                    posy: 420,
+                    isAlive: true
+                }
+            ]
         },
         {
             id: 7,
@@ -181,7 +301,24 @@ export let usefulVariables: usefulVariablesInterface = {
                 posy: 410,
                 type: "mystery",
                 used: false
-            }
+            },
+            npcs: [
+                {
+                    posx: 160,
+                    posy: 120,
+                    isAlive: true
+                },
+                {
+                    posx: 190,
+                    posy: 120,
+                    isAlive: true
+                },
+                {
+                    posx: 220,
+                    posy: 120,
+                    isAlive: true
+                }
+            ]
         },
         {
             id: 8,
@@ -205,7 +342,24 @@ export let usefulVariables: usefulVariablesInterface = {
                 posy: 330,
                 type: "key",
                 used: false
-            }
+            },
+            npcs: [
+                {
+                    posx: 160,
+                    posy: 300,
+                    isAlive: true
+                },
+                {
+                    posx: 190,
+                    posy: 300,
+                    isAlive: true
+                },
+                {
+                    posx: 220,
+                    posy: 300,
+                    isAlive: true
+                }
+            ]
         },
         {
             id: 9,
@@ -229,7 +383,24 @@ export let usefulVariables: usefulVariablesInterface = {
                 posy: 230,
                 type: "hpup",
                 used: false
-            }
+            },
+            npcs: [
+                {
+                    posx: 860,
+                    posy: 100,
+                    isAlive: true
+                },
+                {
+                    posx: 890,
+                    posy: 100,
+                    isAlive: true
+                },
+                {
+                    posx: 920,
+                    posy: 100,
+                    isAlive: true
+                }
+            ]
         },
         {
             id: 10,
@@ -253,7 +424,24 @@ export let usefulVariables: usefulVariablesInterface = {
                 posy: 370,
                 type: "lock",
                 used: false
-            }
+            },
+            npcs: [
+                {
+                    posx: 100,
+                    posy: 100,
+                    isAlive: true
+                },
+                {
+                    posx: 130,
+                    posy: 100,
+                    isAlive: true
+                },
+                {
+                    posx: 160,
+                    posy: 100,
+                    isAlive: true
+                }
+            ]
         },
         {
             id: 11,
@@ -277,14 +465,33 @@ export let usefulVariables: usefulVariablesInterface = {
                 posy: 120,
                 type: "end",
                 used: false
-            }
+            },
+            npcs: [
+                {
+                    posx: 100,
+                    posy: 100,
+                    isAlive: true
+                },
+                {
+                    posx: 130,
+                    posy: 100,
+                    isAlive: true
+                },
+                {
+                    posx: 160,
+                    posy: 100,
+                    isAlive: true
+                }
+            ]
         }
     ],
-    loadedBoard: new Board(0, { N: null, S: null, E: 1, W: null }, 10, 128, new Lamp(0, 452, 378, false)),
+    loadedBoard: new Board(0, { N: null, S: null, E: 1, W: null }, 10, 128, null, new Lamp(0, 452, 378, false)),
     StartPosx: 150,
     StartPosy: 270,
-    loadedID: 0,
+    loadedID: 11,
     map: [],
+    npcNames: ["glutek", "joystick", "kibel", "monitor", "mucha", "pompa", "prysznic"],
+    npcColors: [""],
     status1: document.getElementById("status1") as HTMLCanvasElement,
     status2: document.getElementById("status2") as HTMLCanvasElement,
     bullets: 0,

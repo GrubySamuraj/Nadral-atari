@@ -9,6 +9,7 @@ class Ui {
     public ctx2 = usefulVariables.status2.getContext("2d");
     public hp = 100;
     public interwal: number;
+    public interwal2: number;
     constructor() {
         this.init();
     }
@@ -51,14 +52,57 @@ class Ui {
         this.ctx2.drawImage(document.getElementById("healthbarfull") as HTMLImageElement, 116, 26);
         this.updateNumberMap(this.ctx2);
     }//100s życia, 1 strzał zabiera 3s
+    setHighScore() {
+        const d = new Date();
+        let exdays = 3;
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        let cookie = '"highscore"' + "=" + JSON.stringify(parseInt(this.high.join(""))) + ";" + expires + ";path=/"
+        console.log(cookie);
+        document.cookie = cookie;
+    }
+    getHighScore() {
+        let obj = JSON.parse("{" + document.cookie.replace("=", ":") + "}");
+        console.log(obj.highscore);
+        let str = (obj.highscore.toString()).split("");
+        while (str.length < 6) {
+            str.unshift("0");
+        }
+        let num = str.map((item: string) => {
+            return parseInt(item)
+        })
+        console.log(num);
+        this.high = num;
+        this.ctx.clearRect(1082, 75, 200, 100);
+        for (let x = 0; x < this.high.length; x++) {
+            this.ctx.drawImage(document.getElementById("numbersUp") as HTMLImageElement,
+                27 * this.high[x], //sx
+                0, //sy
+                27, //sWidth
+                50, //sHeight
+                x * 33 + 1082, //dx
+                75, //dy
+                30, //dWidth
+                100 //dHeight
+            );
+        }
+    }
     writePoints(score: number) {
         let ctx = usefulVariables.canvas.getContext("2d");
-        this.points = this.convertPoints(score);
+        this.points = this.convertSumPoints(score);
         console.log(this.points);
-        let isHighScore = true;
+        let isHighScore = false;
+        if (parseInt(this.points.join("")) > parseInt(this.high.join(""))) {
+            isHighScore = true;
+        }
         if (isHighScore) {
+            this.high = this.points;
+            // console.log();
+            // console.log(this.convertScorePoints(this.points));
+            this.setHighScore();
+            this.ctx.clearRect(1082, 75, 200, 100);
             for (let x = 0; x < this.high.length; x++) {
-                ctx.drawImage(document.getElementById("numbersUp") as HTMLImageElement,
+                this.ctx.drawImage(document.getElementById("numbersUp") as HTMLImageElement,
                     27 * this.high[x], //sx
                     0, //sy
                     27, //sWidth
@@ -85,7 +129,7 @@ class Ui {
             //drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
         }
     }
-    convertPoints(score: number) {
+    convertSumPoints(score: number) {
         let p = parseInt(this.points.join(""));
         p += score;
         let wynik = p.toString().split("").map((item) => {
@@ -96,6 +140,13 @@ class Ui {
         }
         return wynik;
     }
+    // convertScorePoints(points: number[]) {
+    //     let p = parseInt(points.join(""));
+    //     let wynik = p.toString().split("").map((item) => {
+    //         return parseInt(item)
+    //     })
+    //     return wynik;
+    // }
     updateNumberMap(ctx2: CanvasRenderingContext2D) {
         let loadedID = usefulVariables.loadedID.toString();
         if (loadedID.length == 1) {
@@ -117,7 +168,11 @@ class Ui {
             window.clearInterval(this.interwal);
             this.hp = 100;
         }
-        window.setInterval(() => {
+        if (this.interwal2) {
+            window.clearInterval(this.interwal2);
+            this.hp = 100;
+        }
+        this.interwal2 = window.setInterval(() => {
             this.hp--;
         }, 1000)
         this.interwal = window.setInterval(() => {

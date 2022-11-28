@@ -2,6 +2,7 @@ import { usefulVariables } from "./usefulVariables";
 import { player } from "../index";
 import { ui } from "../index";
 import { Bullet } from "./bullet";
+import { Npc } from "./npc";
 export class Engine {
     readonly fps: number = 60;
     public front: string = "right";
@@ -85,7 +86,6 @@ export class Engine {
         }, 1000 / this.fps);
     }
     nextBoard(id: number, posx: number, posy: number) {
-        //wyłączenie kolizji na chwile!!!! lub safespoty zrobić - miejsca gdzie napewno nadral będzie bezpieczny // działa ;>
         usefulVariables.map[usefulVariables.loadedID].lamp.isBroken = false;
         usefulVariables.loadedID = id;
         usefulVariables.loadedBoard = usefulVariables.map[usefulVariables.loadedID];
@@ -93,13 +93,30 @@ export class Engine {
         ui.updateNumberMap(ui.ctx2);
         player.posx = posx;
         player.posy = posy;
+        let npcs = [];
+        if (usefulVariables.boards[usefulVariables.loadedID].npcs) {
+            for (let y = 0; y < usefulVariables.boards[usefulVariables.loadedID].npcs.length; y++) {
+                let npc = new Npc(usefulVariables.boards[usefulVariables.loadedID].npcs[y].posx, usefulVariables.boards[usefulVariables.loadedID].npcs[y].posy, usefulVariables.npcNames[Math.floor(Math.random() * usefulVariables.npcNames.length)]);
+                npcs.push(npc);
+            }
+        }
+        usefulVariables.loadedBoard.npcs = npcs;
     }
     lost() {
         if (ui.lives > 0) {
             player.posx = usefulVariables.StartPosx;
             player.posy = usefulVariables.StartPosy;
-            usefulVariables.loadedBoard.load();
             ui.lives--;
+            usefulVariables.loadedBoard.load();
+            let npcs = [];
+            if (usefulVariables.boards[usefulVariables.loadedID].npcs) {
+                for (let y = 0; y < usefulVariables.boards[usefulVariables.loadedID].npcs.length; y++) {
+                    let npc = new Npc(usefulVariables.boards[usefulVariables.loadedID].npcs[y].posx, usefulVariables.boards[usefulVariables.loadedID].npcs[y].posy, usefulVariables.npcNames[Math.floor(Math.random() * usefulVariables.npcNames.length)]);
+                    npcs.push(npc);
+                }
+            }
+            usefulVariables.loadedBoard.npcs = npcs;
+            usefulVariables.loadedBoard.lamp.isBroken = false;
             ui.updateLife();
             ui.startHP();
         }
