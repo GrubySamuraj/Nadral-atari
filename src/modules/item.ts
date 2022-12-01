@@ -110,7 +110,7 @@ class Item {
             this.addLife();
         }
         else if (type === "points") {
-            ui.writePoints(500);
+            ui.addPoints(500);
         }
     }
     missionEnd() {

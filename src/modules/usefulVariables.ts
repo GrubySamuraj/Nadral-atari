@@ -488,7 +488,7 @@ export let usefulVariables: usefulVariablesInterface = {
     loadedBoard: new Board(0, { N: null, S: null, E: 1, W: null }, 10, 128, null, new Lamp(0, 452, 378, false)),
     StartPosx: 150,
     StartPosy: 270,
-    loadedID: 11,
+    loadedID: 0,
     map: [],
     npcNames: ["glutek", "joystick", "kibel", "monitor", "mucha", "pompa", "prysznic"],
     npcColors: [""],

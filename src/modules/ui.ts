@@ -63,31 +63,32 @@ class Ui {
     }
     getHighScore() {
         let obj = JSON.parse("{" + document.cookie.replace("=", ":") + "}");
-        console.log(obj.highscore);
-        let str = (obj.highscore.toString()).split("");
-        while (str.length < 6) {
-            str.unshift("0");
-        }
-        let num = str.map((item: string) => {
-            return parseInt(item)
-        })
-        console.log(num);
-        this.high = num;
-        this.ctx.clearRect(1082, 75, 200, 100);
-        for (let x = 0; x < this.high.length; x++) {
-            this.ctx.drawImage(document.getElementById("numbersUp") as HTMLImageElement,
-                27 * this.high[x], //sx
-                0, //sy
-                27, //sWidth
-                50, //sHeight
-                x * 33 + 1082, //dx
-                75, //dy
-                30, //dWidth
-                100 //dHeight
-            );
+        if (obj.highscore) {
+            console.log(obj.highscore);
+            let str = (obj.highscore.toString()).split("");
+            while (str.length < 6) {
+                str.unshift("0");
+            }
+            let num = str.map((item: string) => {
+                return parseInt(item)
+            })
+            this.high = num;
+            this.ctx.clearRect(1082, 75, 200, 100);
+            for (let x = 0; x < this.high.length; x++) {
+                this.ctx.drawImage(document.getElementById("numbersUp") as HTMLImageElement,
+                    27 * this.high[x], //sx
+                    0, //sy
+                    27, //sWidth
+                    50, //sHeight
+                    x * 33 + 1082, //dx
+                    75, //dy
+                    30, //dWidth
+                    100 //dHeight
+                );
+            }
         }
     }
-    writePoints(score: number) {
+    addPoints(score: number) {
         let ctx = usefulVariables.canvas.getContext("2d");
         this.points = this.convertSumPoints(score);
         console.log(this.points);

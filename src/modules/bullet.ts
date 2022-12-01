@@ -11,7 +11,7 @@ class Bullet {
     public interwal: number;
     private width = 20;
     private height = 5;
-    private WhiteList: string[] = ["#007f7f", "#57ab3b", "#000000", "#901829", "#26060b", "#320924", "#8c1a65", "#081c51", "#123eb2", "#001936", "#008300", "#00489d", "#005d00", "#003900", "#627500", "#005274", "#5134ae", "#5a4300", "#adadad", "#aeaeae", "#0000ff", "#00ffff", "#FFC0CB", "#7f6065", "#00007f"];
+    private WhiteList: string[] = ["#007f7f", "#57ab3b", "#000000", "#901829", "#26060b", "#320924", "#8c1a65", "#081c51", "#123eb2", "#001936", "#008300", "#00489d", "#005d00", "#003900", "#627500", "#005274", "#5134ae", "#5a4300", "#adadad", "#aeaeae", "#0000ff", "#00ffff", "#FFC0CB", "#7f6065", "#00007f", "#000080", "#806065", "#008080"];
     private LampColor: string[] = ["#ffffff"];
     private npcColor: string[] = ["#006ec5", "#bd64d6", "#00799d", "#fa84d1", "#0093b8", "#8f6400", "#241900", "#00bcce", "#753e85"];
     constructor(posx: number, posy: number, direction: string) {

@@ -37,7 +37,7 @@ class Lamp {
     }
     turnOff() {
         this.isBroken = true;
-        ui.writePoints(100);
+        ui.addPoints(100);
     }
 }
 export { Lamp }
