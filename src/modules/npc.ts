@@ -13,7 +13,7 @@ class Npc {
     private readonly width = 60;
     private readonly height = 60;
     public isIdiot = false;
-    private whiteList = ["#000000", "#006ec5", "#bd64d6", "#00799d", "#fa84d1", "#0093b8", "#8f6400", "#241900", "#00bcce", "#753e85"];
+    private whiteList = ["#031702", "#000000", "#006ec5", "#bd64d6", "#00799d", "#fa84d1", "#0093b8", "#8f6400", "#241900", "#00bcce", "#753e85"];
     public speed = 4;
     constructor(posx: number, posy: number, type: string) {
         this.posx = posx;
