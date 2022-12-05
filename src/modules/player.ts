@@ -7,13 +7,14 @@ export class Player {
     readonly playerimgflipped = document.getElementById("playerflipped") as HTMLImageElement;
     public posx: number
     public posy: number
-    public whiteList: string[] = ["#000000", "#901829", "#26060b", "#320924", "#8c1a65", "#081c51", "#123eb2", "#001936", "#008300", "#00489d", "#005d00", "#003900", "#627500", "#005274", "#5134ae", "#adadad", "#aeaeae", "#5a4300", "#0000ff", "#00ffff", "#FFC0CB", "#310923", "#57ab3b"];
+    public whiteList: string[] = ["#281a56", "#001017", "#78ad67", "#499031", "#366b25", "#000000", "#901829", "#26060b", "#320924", "#8c1a65", "#081c51", "#123eb2", "#001936", "#008300", "#00489d", "#005d00", "#003900", "#627500", "#005274", "#5134ae", "#adadad", "#aeaeae", "#5a4300", "#0000ff", "#00ffff", "#FFC0CB", "#310923", "#57ab3b"];
     public suprisesColor: string[] = ["#901829", "#26060b", "#320924", "#8c1a65", "#081c51", "#123eb2"];
     public hpColor: string[] = ["#001936", "#008300", "#00489d", "#005d00", "#003900", "#627500"];
     public energyColor: string[] = ["#005274", "#5134ae"];
     public endColor: string[] = ["#5a4300"];
     public key: string[] = ["#adadad"];
     public lock: string[] = ["#aeaeae"];
+    private frame = 0;
     public flipped = true;
     public collision = false;
     public hasKey = false;
@@ -23,24 +24,12 @@ export class Player {
     }
     create() {
         if (engine.front === "right") {
-            let ctx = usefulVariables.canvas.getContext('2d');
-            ctx.drawImage(this.playerimg, this.posx, this.posy, this.width, this.height);
-            // let imageData = ctx.getImageData(this.posx, this.posy, this.width, this.height);
-            // console.log(imageData);
-
-            // let data = imageData.data;
-            // for (var p = 0; p < data.length; p += 4) {
-            //     data[p + 0] = 233;
-            //     data[p + 1] = 233;
-            //     data[p + 2] = 233;
-            //     data[p + 3] = 255;
-            // }
-            // // ctx.putImageData(imageData, 0, 0);
+            this.playerimg.src = "./src/gfx/player.png";
         }
         else if (engine.front === "left") {
-            let ctx = usefulVariables.canvas.getContext('2d');
-            ctx.drawImage(this.playerimgflipped, this.posx, this.posy, this.width, this.height);
+            this.playerimg.src = "./src/gfx/playerflipped.png";
         }
+        this.animate();
     }
     isColided() {
         let ctx = usefulVariables.canvas.getContext('2d');
@@ -71,12 +60,21 @@ export class Player {
         if (this.endColor.includes(hex) || this.endColor.includes(hex2) || this.endColor.includes(hex3) || this.endColor.includes(hex4)) {
             usefulVariables.loadedBoard.item.useItem("end");
         }
-        if (!this.whiteList.includes(hex) || !this.whiteList.includes(hex2) || !this.whiteList.includes(hex3) || !this.whiteList.includes(hex4)) {
-            return true;
+        if ((this.whiteList.includes(hex) && this.whiteList.includes(hex2) && this.whiteList.includes(hex3) && this.whiteList.includes(hex4)) || usefulVariables.isAnimation) {
+            return false;
         }
-        return false;
+        console.log(hex, hex2, hex3, hex4);
+        return true;
     }
     rgbToHex(r: any, g: any, b: any) {
         return ((r << 16) | (g << 8) | b).toString(16);
+    }
+    animate() {
+        let ctx = usefulVariables.canvas.getContext('2d');
+        ctx.drawImage(this.playerimg, 17 * this.frame, 0, 16, 14, this.posx, this.posy, this.width, this.height);
+        this.frame++;
+        if (this.frame >= 4) {
+            this.frame = 0;
+        }
     }
 } 

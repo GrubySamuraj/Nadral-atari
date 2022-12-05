@@ -13,6 +13,19 @@ interface usefulVariablesInterface {
     status1: HTMLCanvasElement,
     status2: HTMLCanvasElement,
     bullets: number,
+    infoScreen: HTMLDivElement,
+    music: HTMLAudioElement,
+    pyr: HTMLAudioElement,
+    pew: HTMLAudioElement,
+    lampBoom: HTMLAudioElement,
+    fuelPicked: HTMLAudioElement,
+    hpUpSound: HTMLAudioElement,
+    keypicked: HTMLAudioElement,
+    playerDeath: HTMLAudioElement,
+    player1play: HTMLAudioElement,
+    uiimg: HTMLImageElement,
+    isAnimation: boolean,
+    ui: HTMLDivElement
 }
 interface boardInterface {
     id: number,

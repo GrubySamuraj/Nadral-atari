@@ -38,6 +38,7 @@ class Lamp {
     turnOff() {
         this.isBroken = true;
         ui.addPoints(100);
+        usefulVariables.lampBoom.play();
     }
 }
 export { Lamp }

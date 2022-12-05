@@ -80,12 +80,14 @@ class Item {
             this.used = true;
     }
     addEnergy() {
+        usefulVariables.fuelPicked.play();
         if (ui.hp < 50)
             ui.hp += 50;
         else
             ui.hp = 100
     }
     pickKey() {
+        usefulVariables.keypicked.play();
         player.hasKey = true;
         ui.addKeyToInventory();
     }
@@ -98,6 +100,7 @@ class Item {
         }
     }
     addLife() {
+        usefulVariables.hpUpSound.play();
         ui.lives++;
         ui.updateLife();
     }

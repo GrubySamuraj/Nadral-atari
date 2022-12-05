@@ -124,14 +124,6 @@ class Npc {
                 break;
         }
         this.isAlive = false;
-        // mucha - 100pkt
-        // dildos - 0pkt
-        // telewizor - 150pkt
-        // prysznic - 175pkt
-        // telefon - 300pkt
-        // glutek - 0pkt
-        // kibel - 250pkt
-        // pompa - 400pkt
     }
     idiotNpc() {
         window.setTimeout(() => {

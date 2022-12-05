@@ -1,6 +1,6 @@
 import { usefulVariables } from "./usefulVariables";
 import { player } from "../index";
-import { ui } from "../index";
+import { ui, start } from "../index";
 import { Bullet } from "./bullet";
 import { Npc } from "./npc";
 export class Engine {
@@ -11,7 +11,6 @@ export class Engine {
     private interval2: number;
     private cooldown: boolean = false;
     constructor() {
-        this.move();
     }
     animate() {
         setTimeout(() => {
@@ -103,26 +102,36 @@ export class Engine {
         usefulVariables.loadedBoard.npcs = npcs;
     }
     lost() {
-        if (ui.lives > 0) {
-            player.posx = usefulVariables.StartPosx;
-            player.posy = usefulVariables.StartPosy;
-            ui.lives--;
-            usefulVariables.loadedBoard.load();
-            let npcs = [];
-            if (usefulVariables.boards[usefulVariables.loadedID].npcs) {
-                for (let y = 0; y < usefulVariables.boards[usefulVariables.loadedID].npcs.length; y++) {
-                    let npc = new Npc(usefulVariables.boards[usefulVariables.loadedID].npcs[y].posx, usefulVariables.boards[usefulVariables.loadedID].npcs[y].posy, usefulVariables.npcNames[Math.floor(Math.random() * usefulVariables.npcNames.length)]);
-                    npcs.push(npc);
-                }
+        usefulVariables.isAnimation = true;
+        usefulVariables.playerDeath.play();
+        usefulVariables.playerDeath.onended = (() => {
+            if (ui.lives > 0) {
+                start.PlayerOnePlay();
+                player.posx = usefulVariables.StartPosx;
+                player.posy = usefulVariables.StartPosy;
+                usefulVariables.player1play.onended = (() => {
+                    usefulVariables.pyr.play();
+                    ui.lives--;
+                    usefulVariables.loadedBoard.load();
+                    let npcs = [];
+                    if (usefulVariables.boards[usefulVariables.loadedID].npcs) {
+                        for (let y = 0; y < usefulVariables.boards[usefulVariables.loadedID].npcs.length; y++) {
+                            let npc = new Npc(usefulVariables.boards[usefulVariables.loadedID].npcs[y].posx, usefulVariables.boards[usefulVariables.loadedID].npcs[y].posy, usefulVariables.npcNames[Math.floor(Math.random() * usefulVariables.npcNames.length)]);
+                            npcs.push(npc);
+                        }
+                    }
+                    usefulVariables.loadedBoard.npcs = npcs;
+                    usefulVariables.loadedBoard.lamp.isBroken = false;
+                    ui.updateLife();
+                    ui.startHP();
+                    usefulVariables.infoScreen.style.visibility = "hidden";
+                    usefulVariables.isAnimation = false;
+                })
             }
-            usefulVariables.loadedBoard.npcs = npcs;
-            usefulVariables.loadedBoard.lamp.isBroken = false;
-            ui.updateLife();
-            ui.startHP();
-        }
-        else {
-            alert("Przegrałeś! ;<");
-            location.reload();
-        }
+            else {
+                alert("Przegrałeś! ;<");
+                location.reload();
+            }
+        })
     }
 }

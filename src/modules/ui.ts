@@ -11,7 +11,7 @@ class Ui {
     public interwal: number;
     public interwal2: number;
     constructor() {
-        this.init();
+
     }
     init() {
         this.ctx.drawImage(document.getElementById("no1") as HTMLImageElement, 0, 0, 162, 60);
@@ -51,7 +51,7 @@ class Ui {
         this.ctx2.drawImage(document.getElementById("heathbar") as HTMLImageElement, 0, 20);
         this.ctx2.drawImage(document.getElementById("healthbarfull") as HTMLImageElement, 116, 26);
         this.updateNumberMap(this.ctx2);
-    }//100s życia, 1 strzał zabiera 3s
+    }
     setHighScore() {
         const d = new Date();
         let exdays = 3;
@@ -141,13 +141,6 @@ class Ui {
         }
         return wynik;
     }
-    // convertScorePoints(points: number[]) {
-    //     let p = parseInt(points.join(""));
-    //     let wynik = p.toString().split("").map((item) => {
-    //         return parseInt(item)
-    //     })
-    //     return wynik;
-    // }
     updateNumberMap(ctx2: CanvasRenderingContext2D) {
         let loadedID = usefulVariables.loadedID.toString();
         if (loadedID.length == 1) {
