@@ -10,21 +10,25 @@ export class Engine {
     private interval: number;
     private interval2: number;
     private cooldown: boolean = false;
+    public freeze = false;
     constructor() {
+        
     }
     animate() {
-        setTimeout(() => {
-            usefulVariables.map[usefulVariables.loadedID].load();
-            player.create();
-            // document.addEventListener("click",)
-            document.onkeydown = (e) => {
-                this.pressedKey = e.key.toLocaleLowerCase();
-            }
-            document.onkeyup = () => {
-                this.pressedKey = "";
-            }
-            requestAnimationFrame(this.animate.bind(this));
-        }, 1000 / this.fps);
+        if (!this.freeze) {
+            setTimeout(() => {
+                usefulVariables.map[usefulVariables.loadedID].load();
+                player.create();
+                // document.addEventListener("click",)
+                document.onkeydown = (e) => {
+                    this.pressedKey = e.key.toLocaleLowerCase();
+                }
+                document.onkeyup = () => {
+                    this.pressedKey = "";
+                }
+                requestAnimationFrame(this.animate.bind(this));
+            }, 1000 / this.fps);
+        }
     }
     move() {
         this.interval = window.setInterval(() => {
@@ -96,7 +100,15 @@ export class Engine {
         if (usefulVariables.boards[usefulVariables.loadedID].npcs) {
             for (let y = 0; y < usefulVariables.boards[usefulVariables.loadedID].npcs.length; y++) {
                 let npc = new Npc(usefulVariables.boards[usefulVariables.loadedID].npcs[y].posx, usefulVariables.boards[usefulVariables.loadedID].npcs[y].posy, usefulVariables.npcNames[Math.floor(Math.random() * usefulVariables.npcNames.length)]);
-                npcs.push(npc);
+                if (npcs.filter((npc1) => {
+                    if (npc1.type === npc.type) {
+                        return npc;
+                    }
+                }).length != 0) {
+                    y--;
+                }
+                else
+                    npcs.push(npc);
             }
         }
         usefulVariables.loadedBoard.npcs = npcs;
@@ -104,6 +116,7 @@ export class Engine {
     lost() {
         usefulVariables.isAnimation = true;
         usefulVariables.playerDeath.play();
+        player.isExploded = true;
         usefulVariables.playerDeath.onended = (() => {
             if (ui.lives > 0) {
                 start.PlayerOnePlay();
@@ -117,7 +130,15 @@ export class Engine {
                     if (usefulVariables.boards[usefulVariables.loadedID].npcs) {
                         for (let y = 0; y < usefulVariables.boards[usefulVariables.loadedID].npcs.length; y++) {
                             let npc = new Npc(usefulVariables.boards[usefulVariables.loadedID].npcs[y].posx, usefulVariables.boards[usefulVariables.loadedID].npcs[y].posy, usefulVariables.npcNames[Math.floor(Math.random() * usefulVariables.npcNames.length)]);
-                            npcs.push(npc);
+                            if (npcs.filter((npc1) => {
+                                if (npc1.type === npc.type) {
+                                    return npc;
+                                }
+                            }).length != 0) {
+                                y--;
+                            }
+                            else
+                                npcs.push(npc);
                         }
                     }
                     usefulVariables.loadedBoard.npcs = npcs;
@@ -126,11 +147,14 @@ export class Engine {
                     ui.startHP();
                     usefulVariables.infoScreen.style.visibility = "hidden";
                     usefulVariables.isAnimation = false;
+                    player.isExploded = false;
                 })
             }
             else {
-                alert("Przegrałeś! ;<");
-                location.reload();
+                start.PlayerOnefinish();
+                usefulVariables.player1finish.onended = (() => {
+                    location.reload();
+                });
             }
         })
     }

@@ -167,7 +167,9 @@ class Ui {
             this.hp = 100;
         }
         this.interwal2 = window.setInterval(() => {
-            this.hp--;
+            if (!engine.freeze) {
+                this.hp--;
+            }
         }, 1000)
         this.interwal = window.setInterval(() => {
             this.ctx2.drawImage(document.getElementById("heathbar") as HTMLImageElement, 0, 20);
@@ -176,7 +178,9 @@ class Ui {
                 //mryganie na pomaranczowo
             }
             if (this.hp <= 0) {
-                engine.lost();
+                if (!engine.freeze) {
+                    engine.lost();
+                }
             }
         }, 1000 / 60);
     }

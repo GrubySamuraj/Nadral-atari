@@ -5,15 +5,18 @@ export class Player {
     readonly height = 55;
     readonly playerimg = document.getElementById("player") as HTMLImageElement;
     readonly playerimgflipped = document.getElementById("playerflipped") as HTMLImageElement;
+    private readonly whiteList: string[] = ["#523d00", "#588425", "#553f00", "#5a4300", "#281a56", "#001017", "#78ad67", "#499031", "#366b25", "#000000", "#901829", "#26060b", "#320924", "#8c1a65", "#081c51", "#123eb2", "#001936", "#008300", "#00489d", "#005d00", "#003900", "#627500", "#005274", "#5134ae", "#adadad", "#aeaeae", "#5a4300", "#0000ff", "#00ffff", "#FFC0CB", "#310923", "#57ab3b"];
+    private readonly suprisesColor: string[] = ["#901829", "#26060b", "#320924", "#8c1a65", "#081c51", "#123eb2"];
+    private readonly hpColor: string[] = ["#001936", "#008300", "#00489d", "#005d00", "#003900", "#627500"];
+    private readonly energyColor: string[] = ["#005274", "#5134ae"];
+    private readonly endColor: string[] = ["#5a4300"];
+    private readonly key: string[] = ["#adadad"];
+    private readonly lock: string[] = ["#aeaeae"];
+    private readonly boomColors = ["#0000ff", "#00ffff", "#FFC0CB"];
+    public isImmortal = false;
     public posx: number
     public posy: number
-    public whiteList: string[] = ["#281a56", "#001017", "#78ad67", "#499031", "#366b25", "#000000", "#901829", "#26060b", "#320924", "#8c1a65", "#081c51", "#123eb2", "#001936", "#008300", "#00489d", "#005d00", "#003900", "#627500", "#005274", "#5134ae", "#adadad", "#aeaeae", "#5a4300", "#0000ff", "#00ffff", "#FFC0CB", "#310923", "#57ab3b"];
-    public suprisesColor: string[] = ["#901829", "#26060b", "#320924", "#8c1a65", "#081c51", "#123eb2"];
-    public hpColor: string[] = ["#001936", "#008300", "#00489d", "#005d00", "#003900", "#627500"];
-    public energyColor: string[] = ["#005274", "#5134ae"];
-    public endColor: string[] = ["#5a4300"];
-    public key: string[] = ["#adadad"];
-    public lock: string[] = ["#aeaeae"];
+    public isExploded = false;
     private frame = 0;
     public flipped = true;
     public collision = false;
@@ -29,7 +32,10 @@ export class Player {
         else if (engine.front === "left") {
             this.playerimg.src = "./src/gfx/playerflipped.png";
         }
-        this.animate();
+        if (!this.isExploded)
+            this.animate();
+        else
+            this.explodeAnimation();
     }
     isColided() {
         let ctx = usefulVariables.canvas.getContext('2d');
@@ -60,11 +66,16 @@ export class Player {
         if (this.endColor.includes(hex) || this.endColor.includes(hex2) || this.endColor.includes(hex3) || this.endColor.includes(hex4)) {
             usefulVariables.loadedBoard.item.useItem("end");
         }
-        if ((this.whiteList.includes(hex) && this.whiteList.includes(hex2) && this.whiteList.includes(hex3) && this.whiteList.includes(hex4)) || usefulVariables.isAnimation) {
+        if (!this.isExploded && !this.isImmortal) {
+            if ((this.whiteList.includes(hex) && this.whiteList.includes(hex2) && this.whiteList.includes(hex3) && this.whiteList.includes(hex4)) || usefulVariables.isAnimation) {
+                return false;
+            }
+            console.log(hex, hex2, hex3, hex4);
+            return true;
+        }
+        else {
             return false;
         }
-        console.log(hex, hex2, hex3, hex4);
-        return true;
     }
     rgbToHex(r: any, g: any, b: any) {
         return ((r << 16) | (g << 8) | b).toString(16);
@@ -75,6 +86,19 @@ export class Player {
         this.frame++;
         if (this.frame >= 4) {
             this.frame = 0;
+        }
+    }
+    explodeAnimation() {
+        let ctx = usefulVariables.canvas.getContext("2d");
+        for (let x = 0; x < 10; x++) {
+            setTimeout(() => {
+                let color = this.boomColors[Math.floor(Math.random() * this.boomColors.length)];
+                let chosenColor = color;
+                ctx.fillStyle = chosenColor;
+                let max = 200;
+                let min = -200;
+                ctx.fillRect(this.posx + Math.floor(Math.random() * (max - min) + min), this.posy + Math.floor(Math.random() * (max - min) + min), 20, 5);
+            }, 30);
         }
     }
 } 

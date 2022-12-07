@@ -1,6 +1,7 @@
 import { game, player, ui } from "../index";
 import { usefulVariables } from "./usefulVariables";
-
+import { Endscreen } from "./endscreen";
+let endScreen;
 class Item {
     public id: number;
     public posx: number;
@@ -10,6 +11,7 @@ class Item {
     private readonly width = 60;
     private readonly height = 60;
     private types: string[] = ["energy", "life", "points"];
+    private ended = false;
     constructor(id: number, posx: number, posy: number, type: string, used: boolean) {
         this.id = id;
         this.posx = posx;
@@ -27,10 +29,8 @@ class Item {
                     break;
                 case "mystery":
                     ctx = usefulVariables.canvas.getContext("2d");
-                    // ctx.fillStyle = `rgba(0,0,0,0.1)`
                     let mystery = document.getElementById("suprise") as HTMLImageElement;
                     ctx.drawImage(mystery, this.id * 55, 0, 55, 36, this.posx, this.posy, this.width, this.height);
-                    // ctx.fillRect(this.posx, this.posy, this.width, this.height);
                     break;
                 case "hpup":
                     ctx = usefulVariables.canvas.getContext("2d");
@@ -73,7 +73,11 @@ class Item {
                 this.unlock();
                 break;
             case "end":
-                console.log("end");
+                if (!this.ended) {
+                    usefulVariables.endSound.play();
+                    this.missionEnd();
+                    this.ended = true;
+                }
                 break;
         }
         if (this.type != "lock" && this.type != "end")
@@ -93,6 +97,7 @@ class Item {
     }
     unlock() {
         if (player.hasKey) {
+            usefulVariables.unlockSound.play();
             game.image = document.getElementById("SpriteUnlock") as HTMLImageElement;
             player.hasKey = false;
             usefulVariables.loadedBoard.exit.E = 11;
@@ -117,7 +122,8 @@ class Item {
         }
     }
     missionEnd() {
-        console.log("endMission");
+        endScreen = new Endscreen();
+        endScreen.load();
     }
 }
 export { Item }

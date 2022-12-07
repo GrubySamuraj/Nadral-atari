@@ -23,9 +23,18 @@ interface usefulVariablesInterface {
     keypicked: HTMLAudioElement,
     playerDeath: HTMLAudioElement,
     player1play: HTMLAudioElement,
+    player1finish: HTMLAudioElement,
+    unlockSound: HTMLAudioElement,
+    npcDeath: HTMLAudioElement,
+    npcDeath1: HTMLAudioElement,
+    npcDeath2: HTMLAudioElement,
+    endSound: HTMLAudioElement,
+    endMusic: HTMLAudioElement,
     uiimg: HTMLImageElement,
     isAnimation: boolean,
-    ui: HTMLDivElement
+    ui: HTMLDivElement,
+    bonus: HTMLImageElement,
+    nextMission: HTMLImageElement,
 }
 interface boardInterface {
     id: number,

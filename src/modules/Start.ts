@@ -17,6 +17,15 @@ class Start {
         }
         usefulVariables.player1play.play();
     }
+    PlayerOnefinish() {
+        usefulVariables.pyr.pause();
+        usefulVariables.pyr.currentTime = 0;
+        usefulVariables.uiimg.src = "./src/gfx/screens/playerFinish.png";
+        if (usefulVariables.infoScreen.style.visibility === "hidden") {
+            usefulVariables.infoScreen.style.visibility = "visible";
+        }
+        usefulVariables.player1finish.play();
+    }
     loadGame() {
         document.getElementById("game").style.display = "flex";
         usefulVariables.infoScreen.style.visibility = "hidden";
@@ -27,6 +36,14 @@ class Start {
             if (usefulVariables.boards[x].npcs) {
                 for (let y = 0; y < usefulVariables.boards[x].npcs.length; y++) {
                     let npc = new Npc(usefulVariables.boards[x].npcs[y].posx, usefulVariables.boards[x].npcs[y].posy, usefulVariables.npcNames[Math.floor(Math.random() * usefulVariables.npcNames.length)]);
+                    // if (npcs.filter((npc1) => {
+                    //     if (npc1.type === npc.type) {
+                    //         return npc;
+                    //     }
+                    // }).length != 0) {
+                    //     y--;
+                    // }
+                    // else
                     npcs.push(npc);
                 }
             }

@@ -63,3 +63,28 @@ footer {
     width: 100%;
     height: 100%;
 }
+
+#endgameScreen {
+    top: 80px;
+    position: absolute;
+}
+
+#info {
+    width: 500px;
+    height: 300px;
+    background-color: #333;
+    position: absolute;
+    color: white;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    justify-content: center;
+    display: none;
+    z-index: 2;
+}
+
+a {
+    color: white;
+}
