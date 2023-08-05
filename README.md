@@ -14,3 +14,7 @@ The objective is to achieve the highest possible score by defeating enemies with
 You just need to open index.html
 <h1>3.What I used?</h1>
 To create that app i used Typescript with webpack
+<h1>4.Screenshots</h1>
+
+![Here should be screen02.png ;d](https://github.com/GrubySamuraj/Nadral-atari/blob/master/screenshots/Screen02.png?raw=true)
+![Here should be screen1.jpg ;d](https://github.com/GrubySamuraj/Nadral-atari/blob/master/screenshots/screen1.jpg?raw=true)
